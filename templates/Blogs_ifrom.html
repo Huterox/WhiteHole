@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <base href="/">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+          integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div>
+
+    <div class="list-group">
+    {#这里传入的是用户的名字和博客的名字以及所属频道名#}
+        {% for foo in page_object.object_list %}
+            <h4><a href="{% url "Base:viewblog" %}?title={{ foo.title }}&username={{ foo.blog_user.username }}&channelname={{ channelname }}" class="list-group-item-heading" target="_blank">{{ foo.title }}</a></h4>
+            <h4 class="list-group-item-text">{{ foo.date }}</h4>
+        {% endfor %}
+    </div>
+
+
+</div>
+
+<div style="position:absolute;bottom:0;width: 100%;text-align: center">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            {% if page_object.has_previous %}
+                <li>
+                    <a href="{% url "Base:bloglist" %}?page={{ page_object.previous_page_number }}&wirter={{ wirter}}"
+                       aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="disabled">
+                    <a>
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            {% for page_index in page_range %}
+                {% ifequal page_index page_object.number %}
+                    <li class="active"><a
+                            href="{% url "Base:bloglist" %}?page={{ page_index }}&wirter={{ wirter}}">{{ page_index }}</a></li>
+                {% else %}
+                    <li><a href="{% url "Base:bloglist" %}?page={{ page_index }}&wirter={{ wirter}}">{{ page_index }}</a></li>
+
+                {% endifequal %}
+
+            {% endfor %}
+            {% if page_object.has_next %}
+                <li>
+                    <a href="{% url "Base:bloglist" %}?page={{ page_object.next_page_number }}&wirter={{ wirter}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="disabled">
+                    <a>
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+            {% endif %}
+
+        </ul>
+    </nav>
+</div>
+</div>
+</body>
+</html>

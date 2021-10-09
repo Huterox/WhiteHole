@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>验证</title>
+</head>
+
+<style>
+    #center {
+        margin-top: 5%;
+        width: 96%;
+        height: 96%;
+        border: 1px;
+    }
+    
+    img {
+        margin: auto;
+        margin-left: 30%;
+        height: 40%;
+        width: 40%;
+        position: relative;
+        top: 10%;
+    }
+    
+    input {
+        margin-left: 32%;
+        width: 25%;
+        height: 30px;
+        border-width: 0px;
+        border-radius: 3px;
+        background: rgba(162, 224, 240, 0.973);
+        outline: none;
+        color: white;
+        font-size: 17px;
+    }
+    
+    button {
+        width: 10%;
+        height: 35px;
+        border-width: 0px;
+        /* 边框宽度 */
+        border-radius: 3px;
+        /* 边框半径 */
+        background: #1E90FF;
+        /* 背景颜色 */
+        cursor: pointer;
+        /* 鼠标移入按钮范围时出现手势 */
+        outline: none;
+        /* 不显示轮廓线 */
+        font-family: Microsoft YaHei;
+        /* 设置字体 */
+        color: white;
+        /* 字体颜色 */
+        font-size: 17px;
+    }
+</style>
+
+<body>
+    <div id="center">
+        {% csrf_token %}
+        <img id="img" src="{% url "Base:get_code_img" %}">
+        <form action="{% url "Base:verify" %}" method="POST">{% csrf_token %}
+            <input type="text" name="Get_code" placeholder="请输入验证码" required>
+            <button>提交</button>
+        </form>
+    </div>
+</body>
+<script type="text/javascript" src="{% static "/js/jquery-3.1.1.min.js" %}"></script>
+<script>
+
+    $(()=>{
+        $("#img").click(()=>{
+            let getpicurl="/Base/get_code_img/?pic="+Math.random();
+            $("#img").attr("src", getpicurl);
+            console.log(getpicurl);
+        })
+
+    })
+</script>
+
+</html>

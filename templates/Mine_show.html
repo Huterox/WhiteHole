@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>Mine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/static/css/stack-interface.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/static/css/theme-charcoal.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/static/css/custom.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/static/css/theme.css" rel="stylesheet" type="text/css" media="all"/>
+
+</head>
+<style>
+    #submit {
+        margin-left: 80%;
+        width: 20%;
+        height: 35px;
+        border-width: 0px;
+        border-radius: 3px;
+        background: #1E90FF;
+        cursor: pointer;
+        outline: none;
+        font-family: Microsoft YaHei;
+        color: white;
+        font-size: 17px;
+    }
+
+    button {
+        margin-left: 80%;
+        width: 20%;
+        height: 35px;
+        border-width: 0px;
+        border-radius: 3px;
+        background: #1E90FF;
+        cursor: pointer;
+        outline: none;
+        font-family: Microsoft YaHei;
+        color: white;
+        font-size: 17px;
+    }
+</style>
+
+<body data-smooth-scroll-offset="77">
+<div class="nav-container"></div>
+<div class="main-container">
+    <section class="imagebg space--xxs" data-overlay="4">
+        <div class="background-image-holder"><img alt="background" src="/static/image/landing-12.jpg"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="btn btn--sm"><img id="userpic" src="{{ userpic }}"
+                                                   style="height: 100px;width:100px ;border-radius:60px;"></span>
+                    <br>
+                    <span class="btn btn--sm"><p style="width: 100px;">{{ username }}</p></span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="bg--secondary">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="tabs-container tabs--vertical">
+                        <ul class="tabs">
+                            <li class="active">
+                                <div class="tab__title"><span class="h5"><p>Ta的简介</p></span></div>
+                                <div class="tab__content">
+                                    <br>
+                                    <br>
+                                    <p class="lead">简介: </p>
+                                    <p class="lead">{{ userinfo }}</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tab__title"><span class="h5"><p>Ta的频道</p></span></div>
+                                <div class="tab__content">
+                                    <iframe src="{% url "Channel:channellist" %}?wirter={{ username }}" frameborder="0"
+                                            scrolling="no" width="100%"
+                                            height="600px">
+                                    </iframe>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tab__title"><span class="h5"><p>Ta的博客</p></span></div>
+                                <div class="tab__content">
+                                    <iframe src="{% url "Base:bloglist" %}?wirter={{ username }}" frameborder="0"
+                                            scrolling="no" width="100%"
+                                            height="600px">
+                                    </iframe>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script src="/static/js/jquery-3.1.1.min.js"></script>
+<script src="/static/js/parallax.js"></script>
+<script src="/static/js/smooth-scroll.min.js"></script>
+<script src="/static/js/scripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>注册</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/static/css/stack-interface.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/static/css/theme.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/static/css/custom.css" rel="stylesheet" type="text/css" media="all" />
+
+</head>
+
+<body data-smooth-scroll-offset="77">
+    <div class="nav-container"> </div>
+    <div class="main-container">
+        <section class="space--xs imageblock switchable feature-large">
+            <div class="imageblock__content col-lg-5 col-md-4 pos-right">
+                <div class="background-image-holder"> <img alt="image" src="/static/image/art-1.jpg"> </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-7">
+                        <h2>用户注册</h2> <span>Already have an account? <a href="#">Sign In</a></span>
+                        <hr class="short">
+                        <form action="{% url "Base:regirst" %}" method="POST">{% csrf_token %}
+                            <div class="row">
+                                <div class="col-12"> <input type="text" name="username" placeholder="姓名/称呼" required maxlength="32"> </div>
+                                <div class="col-12"> <input type="email" name="useremail" placeholder="电子邮件" required max="64"> </div>
+                                <div class="col-12"> <input type="password" name="password" id="password1" placeholder="密码" required minlength="8" maxlength="128"> </div>
+                                <div class="col-12"> <input type="password" name="passwordConfirm" id="password2" placeholder="Confirm Password" required> </div>
+                                <div class="col-12">
+                                    <div class="input-checkbox"> <input type="checkbox" name="agree" id="agreebox" required> <label> </label> </div> <span>同意服务条款</span> </div>
+                                <div class="col-12"> <button type="submit" class="btn btn--primary" id="resgirstbutton">注册账号</button> </div>
+                                <hr>
+                                <div class="col-12"> <span class="type--fine-print">马上注册, 并同意网站 <a href="#">服务条款</a></span> </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="/static/js/jquery-3.1.1.min.js"></script>
+    <script src="/static/js/parallax.js"></script>
+    <script src="/static/js/smooth-scroll.min.js"></script>
+    <script src="/static/js/scripts.js"></script>
+
+    <script>
+        var input1 = document.getElementById("password1");
+        var input2 = document.getElementById("password2");
+        var submitbutton = document.getElementById("resgirstbutton");
+
+        submitbutton.addEventListener("click", () => {
+            if (input1.value != input2.value) {
+                input1.value = "";
+                input2.value = "";
+            }
+
+        })
+    </script>
+
+    {{ tips }}
+
+</body>
+
+</html>

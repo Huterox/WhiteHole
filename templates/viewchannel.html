@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/css/stack-interface.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/static/css/stack-interface.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/static/css/theme.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/static/css/custom.css" rel="stylesheet" type="text/css" media="all"/>
+
+</head>
+
+<body data-smooth-scroll-offset="77">
+<div class="nav-container">
+    <div class="via-1633426998790" via="via-1633426998790" vio="是的">
+        <div class="bar bar--sm visible-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3 col-md-2">
+                        <a href="index.html"> <img class="logo logo-dark" alt="logo" src="{{ userpic }}"> <img
+                                class="logo logo-light" alt="logo" src="{{ userpic }}"> </a>
+                    </div>
+                    <div class="col-9 col-md-10 text-right">
+                        <a href="#" class="hamburger-toggle" data-toggle-class="#menu1;hidden-xs hidden-sm"> <i
+                                class="icon icon--sm stack-interface stack-menu"></i> </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav id="menu1" class="bar bar-1 hidden-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-1 col-md-2 hidden-xs">
+                        <div class="bar__module">
+                            <a href="#"> <img style="height: 70px;width: 80px;border-radius: 100px" src="{{ userpic }}">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-11 col-md-12 text-right text-left-xs text-left-sm">
+                        <div class="bar__module">
+                            <a class="btn btn--sm type--uppercase" href="#houleyong" id="addlink"> <span
+                                    class="btn__text">添加</span> </a>
+                            <a class="btn btn--sm btn--primary type--uppercase" href="#dangshen!"
+                               id="deletelink"> <span class="btn__text">移除</span> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="main-container">
+    <section class="bg--secondary">
+        <div class="container">
+            <div class="row text-block" style="height:480px;border-radius: 20px;background-color: beige; display: none;" id="addout">
+                <div class="col-md-12">
+                    <span style="font-size: 18px;">添加：</span>
+
+                    <div>
+                        <iframe src="{% url "Channel:bloglist" %}?wirter={{ wirter }}&channelname={{ channelname }}" frameborder="0" scrolling="no">
+
+                        </iframe>
+
+
+                        <a href="{% url "Channel:viewchannel" %}?channel_name={{ channelname }}&channel_wirter={{ wirter }}">
+                            <button id="addclose" class="btn btn--sm type--uppercase"
+                                style="width: 10%;margin-left: 90%;margin-top:5%;background-color: aqua;">确定
+                            </button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row text-block" style="height: 480px;border-radius: 20px;background-color: beige;display: none;" id="deleteout">
+                <div class="col-md-12">
+                    <span style="font-size: 20px;">移除：</span>
+                    <div>
+                        <iframe src="{% url "Channel:bloglistremove" %}?wirter={{ wirter }}&channelname={{ channelname }}" frameborder="0" scrolling="no">
+
+                        </iframe>
+                        <!-- 这里到时候嵌入博客列表就好了 -->
+                        <button id="deleteclose" class="btn btn--sm type--uppercase"
+                                style="width: 10%;margin-left: 90%;margin-top:5%;background-color: aqua;">确定
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row text-block">
+                <div class="col-md-12">
+                    <h3>博文</h3>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for channelblog in channelblogs %}
+
+                    <div class="col-md-4">
+                        <article class="feature feature-1">
+                            <a href="#" class="block"> <img alt="Image" style="border-radius: 100px;width: 200px"
+                                                            src="{{ userpic }}"> </a>
+                            <div class="feature__body boxed boxed--border"><span>{{ channelblog.title }}</span>
+                                <h5>{{channelblog.date}}</h5> <a href="{% url "Base:viewblog" %}?title={{ channelblog.title }}&username={{ wirter }}">
+                                    查看博文
+                                </a></div>
+                        </article>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+</div>
+<script src="/static/js/jquery-3.1.1.min.js"></script>
+<script src="/static/js/parallax.js"></script>
+<script src="/static/js/smooth-scroll.min.js"></script>
+<script src="/static/js/scripts.js"></script>
+
+</body>
+<script>
+    var addlink = document.getElementById("addlink");
+    var deletelink = document.getElementById("deletelink");
+    var addout = document.getElementById("addout");
+    var deleteout = document.getElementById("deleteout");
+    var addclose = document.getElementById("addclose");
+    var deleteclose = document.getElementById("deleteclose");
+
+    addclose.addEventListener("click", () => {
+        addout.style.display = "none";
+    });
+
+    deleteclose.addEventListener("click", () => {
+        deleteout.style.display = "none";
+    });
+
+    addlink.addEventListener("click", () => {
+        addout.style.display = "block";
+        deleteout.style.display = "none";
+    });
+    deletelink.addEventListener("click", () => {
+        addout.style.display = "none";
+        deleteout.style.display = "block";
+    });
+</script>
+
+</html>

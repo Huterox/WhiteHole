@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/css/stack-interface.css" rel="stylesheet" type="text/css" media="all">
+    <link href="../static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="../static/css/stack-interface.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="../static/css/theme.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="../static/css/custom.css" rel="stylesheet" type="text/css" media="all"/>
+
+</head>
+
+<body data-smooth-scroll-offset="77">
+<div class="nav-container">
+    <div class="via-1632026291631" via="via-1632026291631" vio="index_daohang">
+        <div class="bar bar--sm visible-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3 col-md-2">
+
+                    </div>
+                    <div class="col-9 col-md-10 text-right">
+                        <a href="#" class="hamburger-toggle" data-toggle-class="#menu2;hidden-xs hidden-sm"> <i
+                                class="icon icon--sm stack-interface stack-menu"></i> </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav id="menu2" class="bar bar-2 hidden-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 text-center text-left-sm hidden-xs order-lg-2">
+                        <div class="bar__module">
+
+                        </div>
+                    </div>
+                    <div class="col-lg-5 order-lg-1">
+
+
+                        <div class="bar__module">
+                            <ul class="menu-horizontal text-left">
+                                {{ userpic }}
+                                {#   用户登录后的头像显示#}
+
+                                &nbsp;
+
+                                <li><a href="#">
+                                    首页
+                                </a></li>
+                                <li><a href="{% url "index" %}">刷新</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 text-right text-left-xs text-left-sm order-lg-3">
+                        <div class="bar__module">
+                            <a target="_blank" class="btn btn--sm type--uppercase"
+                               href="{% url "Base:regirst" %}"> <span class="btn__text">
+                                    注册
+                                </span> </a>
+                            <a target="_blank" class="btn btn--sm type--uppercase" href="{% url "Base:login" %}"> <span
+                                    class="btn__text">登录</span> </a>
+                            <a target="_blank" class="btn btn--sm type--uppercase" href="{% url "Blog:Editor" %}"> <span
+                                    class="btn__text">创作</span> </a>
+                            <a target="_blank" class="btn btn--sm type--uppercase"
+                               href="{% url "Channel:indexchannellist" %}"> <span class="btn__text">频道</span> </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="main-container">
+    <section class="cover imagebg text-center section--ken-burns height-60" data-overlay="2">
+        <div class="background-image-holder"><img alt="background" src="/static/image/knowledge-1.jpg"></div>
+        <div class="container pos-vertical-center">
+            <div class="row">
+                <div class="col-md-10 col-lg-8">
+                    <h1>White Hole</h1>
+                    <p class="lead">自由，和谐，无约束的技术交流社区</p>
+                    <div class="boxed boxed--lg bg--white text-left">
+                        <form class="form--horizontal row m-0" action="{% url "Channel:indexchannelsearch" %}"
+                              method="post">
+                            <div class="col-md-8"><input type="text" name="search" placeholder="频道搜索"></div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn--primary type--uppercase">搜索</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <iframe src="{% url "Channel:indexchannelsearch" %}?flag={{ flag }}" style="height: 600px">
+
+    </iframe>
+</div>
+<script src="/static/js/jquery-3.1.1.min.js"></script>
+<script src="/static/js/parallax.js"></script>
+<script src="/static/js/smooth-scroll.min.js"></script>
+<script src="/static/js/scripts.js"></script>
+{{ tips }}
+
+</body>
+
+</html>

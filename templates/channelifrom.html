@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/static/css/stack-interface.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/static/css/theme.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/static/css/custom.css" rel="stylesheet" type="text/css" media="all" />
+
+</head>
+
+<body data-smooth-scroll-offset="77">
+    <div class="nav-container"> </div>
+    <div class="main-container">
+        <section class="text-center">
+            <div class="container">
+                <div class="row justify-content-center no-gutters">
+                    <div class="col-md-8 col-lg-7">
+                        {% csrf_token %}
+                        <form action="{% url "Channel:create" %}" method="POST" class="text-left form-email row mx-0" data-success="创建成功！">
+
+                            <div class="col-md-6"> <label>名称:</label> <input type="text" name="name" class="validate-required" required style="font-size: 15px" maxlength="64"> </div>
+                            <div class="col-md-12"> <label>描述:</label> <textarea style="font-size: 17px" rows="6" name="desc" class="validate-required" maxlength="128"></textarea> </div>
+                            <div class="col-md-5 col-lg-4" style="margin-left: 65%;height: 40px;"> <button type="submit" class="btn btn--primary type--uppercase">提交 </button> </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="/static/js/jquery-3.1.1.min.js"></script>
+    <script src="/static/js/parallax.js"></script>
+    <script src="/static/js/smooth-scroll.min.js"></script>
+    <script src="/static/js/scripts.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/static/css/stack-interface.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/static/css/theme.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/static/css/custom.css" rel="stylesheet" type="text/css" media="all"/>
+
+</head>
+
+<body data-smooth-scroll-offset="77">
+<div class="nav-container"></div>
+<div class="main-container">
+    <section class="space--xs">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-8">
+                    <div class="comments">
+                        <h3>{{ title }}</h3>
+                        <a href="{% url "Base:Mine" %}?wirter={{ username }}">作者<span>:{{ username }}</span></a>
+                        <br>
+                        <br>
+                        <div style="border-style: solid;border-color: lightgrey;border-radius: 5px">
+                            {{ blog|safe }}
+                        </div>
+
+                    </div>
+                    <div class="comments-form">
+                        <h4>评论</h4>
+                        {% csrf_token %}
+                        <form class="row" action="{% url "Blog:comment" %}?title={{ title }}&wirter={{ username }}"
+                              method="post">
+                            <div class="col-md-12"><textarea rows="4" name="comment" placeholder="说点什么"></textarea>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn--primary" type="submit">Submit Comment</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="text-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-8">
+                    <div class="row">
+                        {% for comment in comments %}
+                            <div class="col-md-6" style="height: 150px;">
+                                <div class="feature feature-3 boxed boxed--lg boxed--border btn" style="height:150px; width: 300px; background-color:floralwhite">
+                                    <span style="position: absolute;top: 0px;left: 10px;font-size: 20px">{{ comment.comment_user.username }}</span><br>
+                                    <h8 style="position: absolute;top: 30px;left: 10px;font-size: 15px">评论道：</h8>
+                                    <p style="position: absolute;top: 60px;left: 10px;font-size: 13px">{{ comment.comment }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+<script src="/static/js/jquery-3.1.1.min.js"></script>
+<script src="/static/js/parallax.js"></script>
+<script src="/static/js/smooth-scroll.min.js"></script>
+<script src="/static/js/scripts.js"></script>
+
+</body>
+{{ tips|safe }}
+</html>

@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>Mine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/static/css/stack-interface.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/static/css/theme-charcoal.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/static/css/custom.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/static/css/theme.css" rel="stylesheet" type="text/css" media="all"/>
+
+</head>
+<style>
+    #submit {
+        margin-left: 80%;
+        width: 20%;
+        height: 35px;
+        border-width: 0px;
+        border-radius: 3px;
+        background: #1E90FF;
+        cursor: pointer;
+        outline: none;
+        font-family: Microsoft YaHei;
+        color: white;
+        font-size: 17px;
+    }
+
+    button {
+        margin-left: 80%;
+        width: 20%;
+        height: 35px;
+        border-width: 0px;
+        border-radius: 3px;
+        background: #1E90FF;
+        cursor: pointer;
+        outline: none;
+        font-family: Microsoft YaHei;
+        color: white;
+        font-size: 17px;
+    }
+</style>
+
+<body data-smooth-scroll-offset="77">
+<div class="nav-container"></div>
+<div class="main-container">
+    <section class="imagebg space--xxs" data-overlay="4">
+        <div class="background-image-holder"><img alt="background" src="/static/image/landing-12.jpg"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="btn btn--sm"><img id="userpic" src="{{ userpic }}"
+                                                   style="height: 100px;width:100px ;border-radius:60px;"></span>
+                    <br>
+                    <span class="btn btn--sm"><p style="width: 100px;">{{ username }}</p></span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="bg--secondary">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="tabs-container tabs--vertical">
+                        <ul class="tabs">
+
+                            <li class="active">
+                                <div class="tab__title"><span class="h5"><p>编辑简介</p></span></div>
+                                <div class="tab__content">
+                                    <form action="{% url "Base:submitinfo" %}" method="POST">
+                                        <textarea name="userinfo" maxlength="256"
+                                                  style="height: 300px;border-radius: 5px;outline: none;"></textarea>
+                                        <br>
+                                        <button id="submit" style="height: 40px;">保存</button>
+                                    </form>
+                                </div>
+                            </li>
+
+                            <li class="active">
+                                <div class="tab__title"><span class="h5"><p>更换头像</p></span></div>
+                                <div class="tab__content">
+
+                                    <form action="{% url 'Base:userpic' %}" enctype="multipart/form-data" method="POST">
+                                        <div style="background-color:rgb(233, 230, 230); width: 100%; height: 300px;">
+                                            <img src="" id="showimg">
+                                        </div>
+                                        <br>
+
+                                        <input id="file" onchange="changepic(this)" type="file" name="userpic"
+                                               style="height: 50px; display:inline-block;width: 50%;">
+                                        <button style="height: 40px;position: relative; margin-left: 29%;">确定</button>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="active">
+                                <div class="tab__title"><span class="h5"><p>我的简介</p></span></div>
+                                <div class="tab__content">
+                                    <br>
+                                    <br>
+                                    <p class="lead">简介: </p>
+                                    <p class="lead">{{ userinfo }}</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tab__title"><span class="h5"><p>我的频道</p></span></div>
+                                <div class="tab__content">
+                                    <iframe src="{% url "Channel:channellist" %}" frameborder="0" scrolling="no" width="100%"
+                                            height="600px">
+                                    </iframe>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tab__title"><span class="h5"><p>我的博客</p></span></div>
+                                <div class="tab__content">
+                                    <iframe src="{% url "Base:bloglist" %}" frameborder="0" scrolling="no" width="100%"
+                                            height="600px">
+
+                                    </iframe>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tab__title"><span class="h5"><p>创建频道</p></span></div>
+                                <div class="tab__content">
+                                    <iframe src="{% url "Channel:create" %}" frameborder="0" scrolling="no" width="100%"
+                                            height="500px">
+
+                                    </iframe>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tab__title"><span class="h5"><p>频道收藏</p></span></div>
+                                <div class="tab__content">
+                                    <p class="lead"> 频道收藏在做~ing </p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tab__title"><span class="h5"><p>博文收藏</p></span></div>
+                                <div class="tab__content">
+                                    <p class="lead">博文收藏在做~ing</p>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script src="/static/js/jquery-3.1.1.min.js"></script>
+<script src="/static/js/parallax.js"></script>
+<script src="/static/js/smooth-scroll.min.js"></script>
+<script src="/static/js/scripts.js"></script>
+<script>
+    function changepic() {
+        var reads = new FileReader();
+        f = document.getElementById('file').files[0];
+        reads.readAsDataURL(f);
+        reads.onload = function (e) {
+            var showing = document.getElementById('showimg');
+            var userpic = document.getElementById('userpic');
+            showing.src = this.result;
+            showing.style.height = "300px";
+            showing.style.width = "100%";
+        };
+    }
+</script>
+
+</body>
+
+</html>
