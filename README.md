@@ -1,9 +1,6 @@
 
 # whitehole
 
-
-# whitehole
-
 [TOC]
 
 # 项目说明
