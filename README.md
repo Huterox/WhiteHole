@@ -1,9 +1,9 @@
-<<<<<<< HEAD
+
 # whitehole
-=======
-<<<<<<< HEAD
+
+
 # whitehole
-=======
+
 [TOC]
 
 # 项目说明
